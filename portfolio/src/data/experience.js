@@ -4,7 +4,7 @@ export const experience = [
   {
     role: "Web Developer Intern",
     company: "Company Name",
-    duration: "December 2025 – May 2026 (5 Months)",
+    duration: "January 2026 – May 2026 (5 Months)",
     mode: "Hybrid",
 
     description: [
