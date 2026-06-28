@@ -17,9 +17,8 @@ import {
   SiPostman,
   SiCloudinary,
   SiJsonwebtokens,
-  SiRender,
+  SiRailway,
   SiVercel,
-  SiGroq,
 } from "react-icons/si";
 
 export const skills = [
@@ -56,7 +55,7 @@ export const skills = [
   {
   category: "AI & Integrations",
   items: [
-    { name: "Groq API", icon: SiGroq },
+    { name: "Groq API" },
     { name: "AI Resume Review" },
     { name: "ATS Resume Analysis" },
     { name: "Prompt Engineering" },
@@ -71,7 +70,7 @@ export const skills = [
       { name: "Vite", icon: SiVite },
       { name: "Postman", icon: SiPostman },
       { name: "Vercel", icon: SiVercel },
-      { name: "Render", icon: SiRender },
+      { name: "Railway", icon: SiRailway },
       { name: "Figma", icon: FaFigma },
       { name: "VS Code" },
     ],

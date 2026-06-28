@@ -1,0 +1,335 @@
+/* ============================================================
+   SKILLS — Mamta Kurdia Portfolio
+   Glass category cards · skill chips · CSS scroll-reveal
+   ============================================================ */
+
+.skills {
+  position:   relative;
+  padding:    6rem 1.5rem;
+  overflow:   hidden;
+  background: var(--hero-bg, #f7f7fb);
+  font-family: var(--font-sans, "Inter", system-ui, sans-serif);
+}
+
+/* ── Background blobs ── */
+.skills__bg {
+  position:       absolute;
+  inset:          0;
+  pointer-events: none;
+  overflow:       hidden;
+  z-index:        0;
+}
+
+.skills__bg-blob {
+  position:      absolute;
+  border-radius: 9999px;
+  filter:        blur(90px);
+  opacity:       0.40;
+}
+
+.skills__bg-blob--1 {
+  width: 560px; height: 560px;
+  top: -120px; left: -100px;
+  background: radial-gradient(circle, rgba(91,80,232,0.15) 0%, transparent 70%);
+}
+
+.skills__bg-blob--2 {
+  width: 420px; height: 420px;
+  bottom: -80px; right: -60px;
+  background: radial-gradient(circle, rgba(168,85,247,0.13) 0%, transparent 70%);
+}
+
+.skills__bg-blob--3 {
+  width: 340px; height: 340px;
+  top: 50%; left: 55%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(14,165,233,0.10) 0%, transparent 70%);
+}
+
+/* ── Container ── */
+.skills__container {
+  position:       relative;
+  z-index:        1;
+  max-width:      1200px;
+  width:          100%;
+  margin:         0 auto;
+  display:        flex;
+  flex-direction: column;
+  gap:            3.5rem;
+}
+
+/* ============================================================
+   SECTION HEADER
+   ============================================================ */
+
+.skills__header {
+  text-align: center;
+  display:    flex;
+  flex-direction: column;
+  align-items: center;
+  gap:        1rem;
+
+  opacity:   0;
+  transform: translateY(24px);
+  transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1) 0.05s,
+              transform 0.65s cubic-bezier(0.16,1,0.3,1) 0.05s;
+}
+
+.skills__header--visible {
+  opacity:   1;
+  transform: translateY(0);
+}
+
+/* eyebrow */
+.skills__eyebrow {
+  display:     flex;
+  align-items: center;
+  gap:         0.9rem;
+}
+
+.skills__eyebrow-line {
+  width:         60px;
+  height:        1.5px;
+  border-radius: 9999px;
+  background:    linear-gradient(to right, transparent, rgba(91,80,232,0.4));
+}
+
+.skills__eyebrow-line:last-child {
+  background: linear-gradient(to left, transparent, rgba(91,80,232,0.4));
+}
+
+.skills__eyebrow-text {
+  font-size:      0.76rem;
+  font-weight:    600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color:          var(--color-accent, #5b50e8);
+}
+
+/* heading */
+.skills__heading {
+  font-size:      clamp(2rem, 4vw, 2.75rem);
+  font-weight:    800;
+  letter-spacing: -0.025em;
+  line-height:    1.1;
+  color:          var(--color-text-primary, #0f0f10);
+  margin:         0;
+}
+
+.skills__heading-accent {
+  background:  linear-gradient(135deg, var(--color-accent, #5b50e8), #8b7cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.skills__subheading {
+  font-size:  1rem;
+  line-height: 1.7;
+  color:      var(--color-text-secondary, #5a5a6a);
+  max-width:  52ch;
+  margin:     0;
+}
+
+/* ============================================================
+   CARDS GRID
+   ============================================================ */
+
+.skills__grid {
+  display:               grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:                   1.5rem;
+  align-items:           start;
+}
+
+/* ── Category card ── */
+.skills__card {
+  position:        relative;
+  border-radius:   20px;
+  background:      rgba(255,255,255,0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border:          1.5px solid rgba(255,255,255,0.85);
+  box-shadow:      0 2px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+  padding:         0 1.5rem 1.5rem;
+  overflow:        hidden;
+
+  /* reveal */
+  opacity:   0;
+  transform: translateY(32px) scale(0.97);
+  transition:
+    opacity      0.6s cubic-bezier(0.16,1,0.3,1) var(--card-delay, 0s),
+    transform    0.6s cubic-bezier(0.16,1,0.3,1) var(--card-delay, 0s),
+    box-shadow   220ms ease,
+    border-color 220ms ease,
+    background   220ms ease;
+}
+
+.skills__card--visible {
+  opacity:   1;
+  transform: translateY(0) scale(1);
+}
+
+/* hover lift + glow */
+.skills__card:hover {
+  transform:    translateY(-6px) scale(1.01);
+  box-shadow:
+    0 12px 40px var(--card-glow, rgba(91,80,232,0.18)),
+    0 4px 16px rgba(0,0,0,0.08);
+  border-color: rgba(255,255,255,0.95);
+  background:   rgba(255,255,255,0.88);
+}
+
+/* coloured top bar */
+.skills__card-bar {
+  height:           4px;
+  margin:           0 -1.5rem 1.5rem;
+  background:       var(--card-accent, #5b50e8);
+  border-radius:    0 0 4px 4px;
+  opacity:          0.85;
+  transition:       opacity 220ms ease;
+}
+
+.skills__card:hover .skills__card-bar {
+  opacity: 1;
+}
+
+/* card header */
+.skills__card-header {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  margin-bottom:   1.25rem;
+}
+
+.skills__card-title {
+  font-size:      1rem;
+  font-weight:    700;
+  letter-spacing: -0.01em;
+  color:          var(--color-text-primary, #0f0f10);
+  margin:         0;
+}
+
+.skills__card-count {
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  width:           26px;
+  height:          26px;
+  border-radius:   9999px;
+  background:      color-mix(in srgb, var(--card-accent, #5b50e8) 12%, transparent);
+  color:           var(--card-accent, #5b50e8);
+  font-size:       0.72rem;
+  font-weight:     700;
+  flex-shrink:     0;
+}
+
+/* ============================================================
+   SKILL CHIPS
+   ============================================================ */
+
+.skills__chip-list {
+  list-style: none;
+  margin:     0;
+  padding:    0;
+  display:    flex;
+  flex-wrap:  wrap;
+  gap:        0.55rem;
+}
+
+.skill__chip {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             0.42em;
+  padding:         0.38rem 0.72rem;
+  border-radius:   9999px;
+  background:      rgba(255,255,255,0.80);
+  border:          1.5px solid rgba(0,0,0,0.07);
+  font-size:       0.8rem;
+  font-weight:     500;
+  color:           var(--color-text-secondary, #5a5a6a);
+  white-space:     nowrap;
+  cursor:          default;
+  transition:
+    background   180ms ease,
+    border-color 180ms ease,
+    color        180ms ease,
+    transform    180ms cubic-bezier(0.34,1.56,0.64,1),
+    box-shadow   180ms ease;
+}
+
+.skill__chip:hover {
+  background:   color-mix(in srgb, var(--chip-accent, #5b50e8) 10%, white);
+  border-color: color-mix(in srgb, var(--chip-accent, #5b50e8) 35%, transparent);
+  color:        var(--chip-accent, #5b50e8);
+  transform:    translateY(-2px);
+  box-shadow:   0 4px 12px color-mix(in srgb, var(--chip-accent, #5b50e8) 20%, transparent);
+}
+
+.skill__chip-icon {
+  display:     inline-flex;
+  align-items: center;
+  font-size:   1em;
+  color:       var(--chip-accent, #5b50e8);
+  flex-shrink: 0;
+  transition:  transform 180ms cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.skill__chip:hover .skill__chip-icon {
+  transform: scale(1.15);
+}
+
+.skill__chip-name {
+  line-height: 1;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* 2-column on tablet */
+@media (max-width: 1024px) {
+  .skills__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 1-column on mobile */
+@media (max-width: 600px) {
+  .skills { padding: 4.5rem 1rem; }
+
+  .skills__grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .skills__card {
+    padding: 0 1.25rem 1.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .skills__grid { gap: 1.75rem; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .skills__header,
+  .skills__card {
+    transition: none;
+    opacity:    1;
+    transform:  none;
+  }
+
+  .skills__card:hover,
+  .skill__chip:hover {
+    transform: none;
+  }
+
+  .skill__chip:hover .skill__chip-icon {
+    transform: none;
+  }
+}
