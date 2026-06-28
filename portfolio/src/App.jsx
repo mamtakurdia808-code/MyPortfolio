@@ -1,33 +1,36 @@
-import Navbar from "./components/Navbar/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Hero from "./sections/Hero/Hero";
-// import About from "./sections/About/About";
-// import Skills from "./sections/Skills/Skills";
-// import Projects from "./sections/Projects/Projects";
-// import Experience from "./sections/Experience/Experience";
-// import Education from "./sections/Education/Education";
-// import Certificates from "./sections/Certificates/Certificates";
-// import Contact from "./sections/Contact/Contact";
+import MainLayout from "./layout/MainLayout";
 
-// import Footer from "./components/Footer/Footer";
+// Pages
+import Home from "./sections/Hero/Hero";
+import About from "./sections/About/About";
+// import ProjectsPage from "./pages/ProjectsPage";
+// import ProjectDetails from "./pages/ProjectDetails";
+// import ContactPage from "./pages/ContactPage";
+// import ResumePage from "./pages/ResumePage";
+// import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Hero />
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          {/* Home */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About/>} />
 
-      {/* <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Education />
-      <Certificates />
-      <Contact />
 
-      <Footer /> */}
-    </>
+          {/* <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:id" element={<ProjectDetails />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/resume" element={<ResumePage />} /> */}
+
+          {/* 404 */}
+          {/* <Route path="*" element={<NotFound />} /> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

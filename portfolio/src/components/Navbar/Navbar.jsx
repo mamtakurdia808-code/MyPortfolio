@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { NavLink } from "react-router-dom";
 import {
   FiHome,
   FiUser,
@@ -11,138 +12,131 @@ import {
   FiMenu,
   FiX,
 } from "react-icons/fi";
+
 import "./Navbar.css";
 
 const NAV_LINKS = [
-  { id: "home",       label: "Home",       icon: <FiHome />       },
-  { id: "about",      label: "About",      icon: <FiUser />       },
-  { id: "skills",     label: "Skills",     icon: <FiCode />       },
-  { id: "projects",   label: "Projects",   icon: <FiFolder /> },
-  { id: "experience", label: "Experience", icon: <FiBriefcase />  },
-  { id: "education",  label: "Education",  icon: <FiBookOpen />   },
-  { id: "contact",    label: "Contact",    icon: <FiMail />       },
+  { path: "/", label: "Home", icon: <FiHome /> },
+  { path: "/about", label: "About", icon: <FiUser /> },
+  { path: "/skills", label: "Skills", icon: <FiCode /> },
+  { path: "/projects", label: "Projects", icon: <FiFolder /> },
+  { path: "/journey", label: "Journey", icon: <FiBriefcase /> },
+  { path: "/education", label: "Education", icon: <FiBookOpen /> },
+  { path: "/contact", label: "Contact", icon: <FiMail /> },
 ];
 
 export default function Navbar() {
-  const [scrolled,     setScrolled]     = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
-  const [menuOpen,     setMenuOpen]     = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const menuRef = useRef(null);
 
-  /* ── Scroll shadow ── */
+  /* Navbar shadow */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* ── Active section via IntersectionObserver ── */
+  /* Close drawer on outside click */
   useEffect(() => {
-    const ids = NAV_LINKS.map((l) => l.id);
-    const observers = [];
-
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
-        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
-
-  /* ── Close menu on outside click ── */
-  useEffect(() => {
-    const handleOutside = (e) => {
-      if (menuOpen && menuRef.current && !menuRef.current.contains(e.target)) {
+    const handleClick = (e) => {
+      if (
+        menuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(e.target)
+      ) {
         setMenuOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleOutside);
-    return () => document.removeEventListener("mousedown", handleOutside);
+
+    document.addEventListener("mousedown", handleClick);
+
+    return () => document.removeEventListener("mousedown", handleClick);
   }, [menuOpen]);
 
-  /* ── Prevent body scroll when mobile menu is open ── */
+  /* Prevent body scroll */
   useEffect(() => {
     document.body.classList.toggle("nav-no-scroll", menuOpen);
-    return () => document.body.classList.remove("nav-no-scroll");
-  }, [menuOpen]);
 
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      const offset = 72; // navbar height
-      const top = el.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
-    setMenuOpen(false);
-  };
+    return () => {
+      document.body.classList.remove("nav-no-scroll");
+    };
+  }, [menuOpen]);
 
   return (
     <>
       {/* Overlay */}
       <div
-        className={`nav-overlay${menuOpen ? " nav-overlay--visible" : ""}`}
-        aria-hidden="true"
+        className={`nav-overlay ${
+          menuOpen ? "nav-overlay--visible" : ""
+        }`}
         onClick={() => setMenuOpen(false)}
       />
 
-      <header className={`navbar${scrolled ? " navbar--scrolled" : ""}`} role="banner">
-        <nav className="navbar__inner" aria-label="Primary navigation">
+      {/* Navbar */}
+      <header
+        className={`navbar ${
+          scrolled ? "navbar--scrolled" : ""
+        }`}
+      >
+        <nav className="navbar__inner">
 
-          {/* ── Brand ── */}
-          <a
-            href="#home"
+          {/* Logo */}
+          <NavLink
+            to="/"
             className="navbar__brand"
-            onClick={(e) => { e.preventDefault(); scrollTo("home"); }}
-            aria-label="Mamta Kurdia – back to top"
+            onClick={() => setMenuOpen(false)}
           >
             <span className="navbar__brand-first">Mamta</span>
             <span className="navbar__brand-last">Kurdia</span>
-          </a>
+          </NavLink>
 
-          {/* ── Desktop links ── */}
-          <ul className="navbar__links" role="list">
-            {NAV_LINKS.map(({ id, label, icon }) => (
-              <li key={id}>
-                <a
-                  href={`#${id}`}
-                  className={`navbar__link${activeSection === id ? " navbar__link--active" : ""}`}
-                  onClick={(e) => { e.preventDefault(); scrollTo(id); }}
-                  aria-current={activeSection === id ? "page" : undefined}
+          {/* Desktop Links */}
+          <ul className="navbar__links">
+            {NAV_LINKS.map(({ path, label, icon }) => (
+              <li key={path}>
+                <NavLink
+                  to={path}
+                  end={path === "/"}
+                  className={({ isActive }) =>
+                    `navbar__link ${
+                      isActive ? "navbar__link--active" : ""
+                    }`
+                  }
                 >
-                  <span className="navbar__link-icon" aria-hidden="true">{icon}</span>
-                  <span className="navbar__link-label">{label}</span>
-                </a>
+                  <span className="navbar__link-icon">
+                    {icon}
+                  </span>
+
+                  <span className="navbar__link-label">
+                    {label}
+                  </span>
+                </NavLink>
               </li>
             ))}
           </ul>
 
-          {/* ── CTA + Hamburger ── */}
+          {/* Resume + Mobile */}
           <div className="navbar__actions">
             <a
               href="/resume.pdf"
               download
               className="navbar__resume-btn"
-              aria-label="Download resume PDF"
             >
-              <FiDownload aria-hidden="true" />
+              <FiDownload />
               <span>Resume</span>
             </a>
 
             <button
-              className={`navbar__hamburger${menuOpen ? " navbar__hamburger--open" : ""}`}
-              onClick={() => setMenuOpen((prev) => !prev)}
-              aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              className={`navbar__hamburger ${
+                menuOpen ? "navbar__hamburger--open" : ""
+              }`}
+              onClick={() => setMenuOpen(!menuOpen)}
             >
               <span className="navbar__hamburger-icon">
                 {menuOpen ? <FiX /> : <FiMenu />}
@@ -152,59 +146,64 @@ export default function Navbar() {
         </nav>
       </header>
 
-      {/* ── Mobile drawer ── */}
+      {/* Mobile Drawer */}
       <aside
-        id="mobile-menu"
         ref={menuRef}
-        className={`nav-drawer${menuOpen ? " nav-drawer--open" : ""}`}
-        aria-hidden={!menuOpen}
-        aria-label="Mobile navigation"
+        className={`nav-drawer ${
+          menuOpen ? "nav-drawer--open" : ""
+        }`}
       >
         <div className="nav-drawer__header">
-          <span className="nav-drawer__brand">
-            <span className="navbar__brand-first">Mamta</span>
-            <span className="navbar__brand-last"> Kurdia</span>
-          </span>
+          <div className="nav-drawer__brand">
+            <span className="navbar__brand-first">Mamta</span>{" "}
+            <span className="navbar__brand-last">Kurdia</span>
+          </div>
+
           <button
             className="nav-drawer__close"
             onClick={() => setMenuOpen(false)}
-            aria-label="Close menu"
           >
             <FiX />
           </button>
         </div>
 
-        <nav aria-label="Mobile navigation links">
-          <ul className="nav-drawer__links" role="list">
-            {NAV_LINKS.map(({ id, label, icon }, i) => (
-              <li
-                key={id}
-                className="nav-drawer__item"
-                style={{ "--i": i }}
+        <ul className="nav-drawer__links">
+          {NAV_LINKS.map(({ path, label, icon }, i) => (
+            <li
+              key={path}
+              className="nav-drawer__item"
+              style={{ "--i": i }}
+            >
+              <NavLink
+                to={path}
+                end={path === "/"}
+                onClick={() => setMenuOpen(false)}
+                className={({ isActive }) =>
+                  `nav-drawer__link ${
+                    isActive
+                      ? "nav-drawer__link--active"
+                      : ""
+                  }`
+                }
               >
-                <a
-                  href={`#${id}`}
-                  className={`nav-drawer__link${activeSection === id ? " nav-drawer__link--active" : ""}`}
-                  onClick={(e) => { e.preventDefault(); scrollTo(id); }}
-                  aria-current={activeSection === id ? "page" : undefined}
-                >
-                  <span className="nav-drawer__icon" aria-hidden="true">{icon}</span>
-                  <span>{label}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+                <span className="nav-drawer__icon">
+                  {icon}
+                </span>
+
+                <span>{label}</span>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
 
         <div className="nav-drawer__footer">
           <a
             href="/resume.pdf"
             download
             className="navbar__resume-btn navbar__resume-btn--full"
-            aria-label="Download resume PDF"
             onClick={() => setMenuOpen(false)}
           >
-            <FiDownload aria-hidden="true" />
+            <FiDownload />
             <span>Download Resume</span>
           </a>
         </div>
