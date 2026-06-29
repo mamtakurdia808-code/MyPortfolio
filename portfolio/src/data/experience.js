@@ -18,8 +18,8 @@ export const experience = [
 
     technologies: [
       "React",
-      "JavaScript",
-      "HTML",
+      "Vite",
+      "TypeScript",
       "CSS",
       "Node.js",
       "Express.js",
