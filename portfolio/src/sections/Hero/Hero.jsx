@@ -9,7 +9,7 @@ import {
   SiFigma,
   SiGit,
 } from "react-icons/si";
-
+import {Link} from "react-router-dom";
 import { socials } from "../../data/socials";
 import "./Hero.css";
 
@@ -45,7 +45,7 @@ const HERO_CONTENT = {
   description:
     "I craft responsive, accessible web applications with pixel-perfect UIs and build AI-powered full-stack products that turn complex ideas into real-world experiences.",
   buttons: [
-    { label: "View Projects",   href: "#projects",   variant: "primary", download: false },
+    { label: "View Projects", to: "/projects", variant: "primary" },
     { label: "Download Resume", href: "/resume.pdf", variant: "outline", download: true  },
   ],
   image: "/profile.jpg",
@@ -213,36 +213,14 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <motion.div className="hero__buttons" {...fadeIn(0.4)}>
-            {HERO_CONTENT.buttons.map((btn) =>
-              btn.download ? (
-                <a
-                  key={btn.label}
-                  href={btn.href}
-                  download
-                  className={`hero__btn hero__btn--${btn.variant}`}
-                  aria-label="Download resume PDF"
-                >
-                  <FiDownload aria-hidden="true" />
-                  {btn.label}
-                </a>
-              ) : (
-                <a
-                  key={btn.label}
-                  href={btn.href}
-                  className={`hero__btn hero__btn--${btn.variant}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document
-                      .getElementById(btn.href.replace("#", ""))
-                      ?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                >
-                  {btn.label}
-                  <FiArrowRight aria-hidden="true" />
-                </a>
-              )
-            )}
-          </motion.div>
+  <Link
+    to="/projects"
+    className="hero__btn hero__btn--primary"
+  >
+    View Projects
+    <FiArrowRight aria-hidden="true" />
+  </Link>
+</motion.div>
 
           {/* Socials — from src/data/socials.js */}
           <motion.div className="hero__socials" {...fadeIn(0.5)}>

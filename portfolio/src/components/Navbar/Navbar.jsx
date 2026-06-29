@@ -121,17 +121,8 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* Resume + Mobile */}
+          {/* Mobile */}
           <div className="navbar__actions">
-            <a
-              href="/resume.pdf"
-              download
-              className="navbar__resume-btn"
-            >
-              <FiDownload />
-              <span>Resume</span>
-            </a>
-
             <button
               className={`navbar__hamburger ${
                 menuOpen ? "navbar__hamburger--open" : ""

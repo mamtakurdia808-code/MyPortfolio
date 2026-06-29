@@ -20,7 +20,7 @@ export const projects = [
       "JWT Authentication",
       "Cloudinary",
       "Vercel",
-      "Render",
+      "Railway",
     ],
 
     features: [
