@@ -186,18 +186,6 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-
-        <div className="nav-drawer__footer">
-          <a
-            href="/resume.pdf"
-            download
-            className="navbar__resume-btn navbar__resume-btn--full"
-            onClick={() => setMenuOpen(false)}
-          >
-            <FiDownload />
-            <span>Download Resume</span>
-          </a>
-        </div>
       </aside>
     </>
   );

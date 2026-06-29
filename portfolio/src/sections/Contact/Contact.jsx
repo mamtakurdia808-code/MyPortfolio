@@ -54,19 +54,54 @@ export default function Contact() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const next = validate();
-    if (Object.keys(next).length) {
-      setErrors(next);
-      const firstError = Object.keys(next)[0];
-      document.getElementById(firstError)?.focus();
-      return;
+  e.preventDefault();
+
+  const next = validate();
+
+  if (Object.keys(next).length) {
+    setErrors(next);
+    const firstError = Object.keys(next)[0];
+    document.getElementById(firstError)?.focus();
+    return;
+  }
+
+  setSubmitting(true);
+
+  try {
+    console.log(import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: form.message,
+      }),
+    });
+
+    const result = await response.json();
+    console.log(result);
+    
+    if (result.success) {
+      setSubmitted(true);
+      setForm(INITIAL_FORM);
+      setErrors({});
+    } else {
+      alert("Failed to send message. Please try again.");
+      console.error(result);
     }
-    setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1600));
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong. Please try again.");
+  } finally {
     setSubmitting(false);
-    setSubmitted(true);
-  };
+  }
+};
 
   const handleReset = () => {
     setSubmitted(false);

@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import MainLayout from "./layout/MainLayout";
-
 // Pages
 import Home from "./sections/Hero/Hero";
 import About from "./sections/About/About";
@@ -10,10 +9,6 @@ import Projects from "./sections/Projects/Projects";
 import Experience from "./sections/Experience/Experience";
 import Education from "./sections/Education/Education";
 import Contact from "./sections/Contact/Contact";
-// import ProjectDetails from "./pages/ProjectDetails";
-// import ContactPage from "./pages/ContactPage";
-// import ResumePage from "./pages/ResumePage";
-// import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -29,13 +24,6 @@ function App() {
           <Route path="/education" element={<Education/>} />
           <Route path="/contact" element={<Contact/>} />
 
-          {/* <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/projects/:id" element={<ProjectDetails />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/resume" element={<ResumePage />} /> */}
-
-          {/* 404 */}
-          {/* <Route path="*" element={<NotFound />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>
