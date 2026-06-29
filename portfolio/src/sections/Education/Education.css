@@ -1,0 +1,379 @@
+/* ═══════════════════════════════════════════════
+   Education.css
+   Timeline-based Education Section
+   Modern glassmorphism design with academic styling
+═══════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────
+   Local Design Tokens
+───────────────────────────────────────────── */
+
+.edu-section {
+  /* Theme */
+  --color-bg: #0f172a;
+  --color-text: #f1f5f9;
+  --color-muted: #94a3b8;
+
+  /* Layout */
+  --space-section: 6rem;
+  --space-side: 1.5rem;
+  --radius-lg: 1.25rem;
+
+  /* Education Theme */
+  --edu-accent: #c9a84c;
+  --edu-accent-dim: rgba(201, 168, 76, 0.18);
+  --edu-accent-glow: rgba(201, 168, 76, 0.3);
+  --edu-line-color: rgba(201, 168, 76, 0.35);
+
+  --edu-node-size: 3rem;
+  --edu-node-offset: calc(var(--edu-node-size) / 2);
+  --edu-card-radius: var(--radius-lg);
+  --edu-gap: 2.5rem;
+  --edu-timeline-left: 1.5rem;
+
+  padding: var(--space-section) var(--space-side);
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+/* ── section title ── */
+.edu-section-title {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.edu-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--edu-accent);
+  margin-bottom: 0.6rem;
+}
+
+.edu-heading {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+    color:#1e293b;
+    font-weight:800;
+  margin: 0;
+  line-height: 1.1;
+}
+
+/* ── timeline wrapper ── */
+.edu-timeline {
+  position: relative;
+  padding-left: calc(var(--edu-timeline-left) + var(--edu-node-size) + 1.5rem);
+}
+
+/* vertical line */
+.edu-timeline-line {
+  position: absolute;
+  left:   var(--edu-timeline-left);
+  top:    var(--edu-node-offset);
+  bottom: var(--edu-node-offset);
+  width:  2px;
+  background:#d6b252;
+opacity:.6;
+  border-radius: 1px;
+}
+
+/* ── entry ── */
+.edu-entry {
+  position: relative;
+  margin-bottom: var(--edu-gap);
+}
+
+.edu-entry:last-child {
+  margin-bottom: 0;
+}
+
+/* ── timeline node ── */
+.edu-node {
+  position: absolute;
+  left:  calc(-1 * (var(--edu-node-size) + 1.5rem));
+  top:   1.75rem;
+  width: var(--edu-node-size);
+  height: var(--edu-node-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edu-node-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--edu-accent-dim);
+  border: 2px solid var(--edu-accent);
+  box-shadow: 0 0 0 4px var(--edu-accent-glow),
+              0 0 18px var(--edu-accent-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.3s ease;
+}
+
+.edu-node-ring:hover {
+  box-shadow: 0 0 0 6px var(--edu-accent-glow),
+              0 0 28px var(--edu-accent-glow);
+}
+
+.edu-node-icon {
+  font-size: 1.35rem;
+  color: var(--edu-accent);
+}
+
+/* ── glass card ── */
+.edu-card.glass{
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(12px);
+  border:1px solid rgba(201,168,76,.25);
+  padding: 12px;
+  box-shadow:
+      0 15px 45px rgba(0,0,0,.12),
+      0 2px 8px rgba(0,0,0,.06);
+}
+
+.edu-card.glass:hover {
+  border-color: rgba(201, 168, 76, 0.22);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.36),
+              0 0 0 1px rgba(201,168,76,0.12),
+              inset 0 1px 0 rgba(255,255,255,0.09);
+}
+
+/* ── card header ── */
+.edu-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.edu-card-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.edu-degree{
+    color:#0f172a;
+    font-size:1.75rem;
+    font-weight:700;
+  margin: 0 0 0.35rem;
+  line-height: 1.35;
+}
+
+.edu-college{
+    color:#64748b;
+    font-size:1.05rem;
+  margin: 0 0 0.55rem;
+  line-height: 1.4;
+}
+
+.edu-duration {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--edu-accent);
+  background: var(--edu-accent-dim);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 999px;
+  padding: 0.22rem 0.75rem;
+}
+
+/* ── CGPA badge ── */
+.edu-cgpa-badge {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width:  5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--edu-accent) 0%,
+    var(--edu-accent) calc(var(--cgpa-pct, 92.2%) ),
+    rgba(255,255,255,0.06) calc(var(--cgpa-pct, 92.2%))
+  );
+  padding: 3px;
+  box-shadow: 0 0 20px var(--edu-accent-glow);
+}
+
+/* inner fill of the conic donut */
+.edu-cgpa-badge::before {
+  content: "";
+  position: absolute;
+  width:  calc(5rem - 10px);
+  height: calc(5rem - 10px);
+  border-radius: 50%;
+  background: var(--color-bg, #0f172a);
+}
+
+.edu-cgpa-badge {
+  position: relative;
+}
+
+.edu-cgpa-value,
+.edu-cgpa-label {
+  position: relative;
+  z-index: 1;
+}
+
+.edu-cgpa-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--edu-accent);
+  line-height: 1;
+}
+
+.edu-cgpa-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted, #94a3b8);
+  margin-top: 0.15rem;
+}
+
+/* ── divider ── */
+.edu-divider {
+  height: 1px;
+  background:linear-gradient(
+        to right,
+        transparent,
+        rgba(201,168,76,.35),
+        transparent
+    );
+  margin: 1.5rem 0 1.25rem;
+}
+
+/* ── semester section heading ── */
+.edu-sem-heading {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color:#64748b;
+  margin: 0 0 0.9rem;
+}
+
+/* ── semester grid ── */
+.edu-sem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+/* ── semester card ── */
+.edu-sem-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 0.75rem;
+  padding: 0.85rem 1rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  transition: background 0.25s ease, border-color 0.25s ease,
+              transform 0.25s ease;
+  cursor: default;
+}
+
+.edu-sem-card:hover {
+  background: rgba(201,168,76,0.06);
+  border-color: rgba(201,168,76,0.22);
+  transform: translateY(-2px);
+}
+
+.edu-sem-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color:#64748b;
+  text-transform: uppercase;
+}
+
+.edu-sem-grade {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color:#0f172a;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ── SGPA progress bar ── */
+.edu-sgpa-bar-track {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.07);
+  overflow: hidden;
+}
+
+.edu-sgpa-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--edu-accent) 0%, #e8c96b 100%);
+  box-shadow: 0 0 6px var(--edu-accent-glow);
+}
+
+/* ── reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .edu-timeline-line,
+  .edu-node-ring,
+  .edu-sgpa-bar-fill,
+  .edu-sem-card {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ── responsive: tablet ── */
+@media (max-width: 680px) {
+  .edu-section {
+    --edu-timeline-left: 0.9rem;
+    --edu-node-size:     2.5rem;
+  }
+
+  .edu-timeline {
+    padding-left: calc(var(--edu-timeline-left) + var(--edu-node-size) + 1rem);
+  }
+
+  .edu-node {
+    left: calc(-1 * (var(--edu-node-size) + 1rem));
+    top: 1.25rem;
+  }
+
+  .edu-card.glass {
+    padding: 1.35rem 1.25rem 1.25rem;
+  }
+
+  .edu-card-header {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .edu-cgpa-badge {
+    width:  4.25rem;
+    height: 4.25rem;
+  }
+
+  .edu-cgpa-badge::before {
+    width:  calc(4.25rem - 10px);
+    height: calc(4.25rem - 10px);
+  }
+
+  .edu-cgpa-value {
+    font-size: 1rem;
+  }
+}
+
+/* ── responsive: mobile ── */
+@media (max-width: 420px) {
+  .edu-sem-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

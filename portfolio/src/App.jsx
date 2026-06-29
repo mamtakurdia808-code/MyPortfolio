@@ -8,6 +8,7 @@ import About from "./sections/About/About";
 import Skills from "./sections/Skills/Skills"
 import Projects from "./sections/Projects/Projects";
 import Experience from "./sections/Experience/Experience";
+import Education from "./sections/Education/Education";
 // import ProjectDetails from "./pages/ProjectDetails";
 // import ContactPage from "./pages/ContactPage";
 // import ResumePage from "./pages/ResumePage";
@@ -24,6 +25,7 @@ function App() {
           <Route path="/skills" element={<Skills/>} />
           <Route path="/projects" element={<Projects/>} />
           <Route path="/journey" element={<Experience/>} />
+          <Route path="/education" element={<Education/>} />
 
           {/* <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:id" element={<ProjectDetails />} />
