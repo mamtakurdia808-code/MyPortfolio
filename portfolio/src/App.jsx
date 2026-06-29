@@ -12,21 +12,18 @@ import Contact from "./sections/Contact/Contact";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          {/* Home */}
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/skills" element={<Skills/>} />
-          <Route path="/projects" element={<Projects/>} />
-          <Route path="/journey" element={<Experience/>} />
-          <Route path="/education" element={<Education/>} />
-          <Route path="/contact" element={<Contact/>} />
+    <>
 
-        </Route>
-      </Routes>
-    </BrowserRouter>
+      <MainLayout />
+      <Home />
+      <About />
+      <Education />
+      <Skills />
+      <Experience />
+      <Projects />
+      <Contact />
+
+    </>
   );
 }
 

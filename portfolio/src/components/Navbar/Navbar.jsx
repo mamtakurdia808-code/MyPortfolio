@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
 import {
   FiHome,
   FiUser,
@@ -8,7 +7,6 @@ import {
   FiBookOpen,
   FiFolder,
   FiMail,
-  FiDownload,
   FiMenu,
   FiX,
 } from "react-icons/fi";
@@ -16,13 +14,13 @@ import {
 import "./Navbar.css";
 
 const NAV_LINKS = [
-  { path: "/", label: "Home", icon: <FiHome /> },
-  { path: "/about", label: "About", icon: <FiUser /> },
-  { path: "/skills", label: "Skills", icon: <FiCode /> },
-  { path: "/projects", label: "Projects", icon: <FiFolder /> },
-  { path: "/journey", label: "Journey", icon: <FiBriefcase /> },
-  { path: "/education", label: "Education", icon: <FiBookOpen /> },
-  { path: "/contact", label: "Contact", icon: <FiMail /> },
+  { id: "home", label: "Home", icon: <FiHome /> },
+  { id: "about", label: "About", icon: <FiUser /> },
+  { id: "skills", label: "Skills", icon: <FiCode /> },
+  { id: "projects", label: "Projects", icon: <FiFolder /> },
+  { id: "experience", label: "Journey", icon: <FiBriefcase /> },
+  { id: "education", label: "Education", icon: <FiBookOpen /> },
+  { id: "contact", label: "Contact", icon: <FiMail /> },
 ];
 
 export default function Navbar() {
@@ -31,7 +29,6 @@ export default function Navbar() {
 
   const menuRef = useRef(null);
 
-  /* Navbar shadow */
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -42,7 +39,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* Close drawer on outside click */
   useEffect(() => {
     const handleClick = (e) => {
       if (
@@ -59,7 +55,6 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClick);
   }, [menuOpen]);
 
-  /* Prevent body scroll */
   useEffect(() => {
     document.body.classList.toggle("nav-no-scroll", menuOpen);
 
@@ -68,6 +63,8 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <>
       {/* Overlay */}
@@ -75,7 +72,7 @@ export default function Navbar() {
         className={`nav-overlay ${
           menuOpen ? "nav-overlay--visible" : ""
         }`}
-        onClick={() => setMenuOpen(false)}
+        onClick={closeMenu}
       />
 
       {/* Navbar */}
@@ -87,27 +84,22 @@ export default function Navbar() {
         <nav className="navbar__inner">
 
           {/* Logo */}
-          <NavLink
-            to="/"
+          <a
+            href="#home"
             className="navbar__brand"
-            onClick={() => setMenuOpen(false)}
+            onClick={closeMenu}
           >
             <span className="navbar__brand-first">Mamta</span>
             <span className="navbar__brand-last">Kurdia</span>
-          </NavLink>
+          </a>
 
           {/* Desktop Links */}
           <ul className="navbar__links">
-            {NAV_LINKS.map(({ path, label, icon }) => (
-              <li key={path}>
-                <NavLink
-                  to={path}
-                  end={path === "/"}
-                  className={({ isActive }) =>
-                    `navbar__link ${
-                      isActive ? "navbar__link--active" : ""
-                    }`
-                  }
+            {NAV_LINKS.map(({ id, label, icon }) => (
+              <li key={id}>
+                <a
+                  href={`#${id}`}
+                  className="navbar__link"
                 >
                   <span className="navbar__link-icon">
                     {icon}
@@ -116,12 +108,12 @@ export default function Navbar() {
                   <span className="navbar__link-label">
                     {label}
                   </span>
-                </NavLink>
+                </a>
               </li>
             ))}
           </ul>
 
-          {/* Mobile */}
+          {/* Mobile Menu Button */}
           <div className="navbar__actions">
             <button
               className={`navbar__hamburger ${
@@ -146,43 +138,34 @@ export default function Navbar() {
       >
         <div className="nav-drawer__header">
           <div className="nav-drawer__brand">
-            <span className="navbar__brand-first">Mamta</span>{" "}
+            <span className="navbar__brand-first">Mamta</span>
             <span className="navbar__brand-last">Kurdia</span>
           </div>
 
           <button
             className="nav-drawer__close"
-            onClick={() => setMenuOpen(false)}
+            onClick={closeMenu}
           >
             <FiX />
           </button>
         </div>
 
         <ul className="nav-drawer__links">
-          {NAV_LINKS.map(({ path, label, icon }, i) => (
-            <li
-              key={path}
-              className="nav-drawer__item"
-              style={{ "--i": i }}
-            >
-              <NavLink
-                to={path}
-                end={path === "/"}
-                onClick={() => setMenuOpen(false)}
-                className={({ isActive }) =>
-                  `nav-drawer__link ${
-                    isActive
-                      ? "nav-drawer__link--active"
-                      : ""
-                  }`
-                }
+          {NAV_LINKS.map(({ id, label, icon }) => (
+            <li key={id}>
+              <a
+                href={`#${id}`}
+                onClick={closeMenu}
+                className="navbar__link"
               >
-                <span className="nav-drawer__icon">
+                <span className="navbar__link-icon">
                   {icon}
                 </span>
 
-                <span>{label}</span>
-              </NavLink>
+                <span className="navbar__link-label">
+                  {label}
+                </span>
+              </a>
             </li>
           ))}
         </ul>
