@@ -50,7 +50,6 @@ const devCardItems = [
   { emoji: "📍", text: "India" },
   { emoji: "🎓", text: "Bachelors of Computer Applications" },
   { emoji: "💼", text: "Open to Work" },
-  { emoji: "🤖", text: "AI & MERN Enthusiast" },
   { emoji: "⚡", text: "Building scalable web applications" },
 ];
 

@@ -2,7 +2,7 @@ export const education = [
   {
     degree: "Bachelor of Computer Applications (BCA)",
     college: "Pillai College of Arts, Commerce and Science",
-    duration: "2024 – Present",
+    duration: "2024 – 2027",
 
     cgpa: "9.22",
 
