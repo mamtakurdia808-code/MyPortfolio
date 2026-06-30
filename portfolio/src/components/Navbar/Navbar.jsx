@@ -69,17 +69,15 @@ export default function Navbar() {
     <>
       {/* Overlay */}
       <div
-        className={`nav-overlay ${
-          menuOpen ? "nav-overlay--visible" : ""
-        }`}
+        className={`nav-overlay ${menuOpen ? "nav-overlay--visible" : ""
+          }`}
         onClick={closeMenu}
       />
 
       {/* Navbar */}
       <header
-        className={`navbar ${
-          scrolled ? "navbar--scrolled" : ""
-        }`}
+        className={`navbar ${scrolled ? "navbar--scrolled" : ""
+          }`}
       >
         <nav className="navbar__inner">
 
@@ -112,64 +110,8 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-
-          {/* Mobile Menu Button */}
-          <div className="navbar__actions">
-            <button
-              className={`navbar__hamburger ${
-                menuOpen ? "navbar__hamburger--open" : ""
-              }`}
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              <span className="navbar__hamburger-icon">
-                {menuOpen ? <FiX /> : <FiMenu />}
-              </span>
-            </button>
-          </div>
         </nav>
       </header>
-
-      {/* Mobile Drawer */}
-      <aside
-        ref={menuRef}
-        className={`nav-drawer ${
-          menuOpen ? "nav-drawer--open" : ""
-        }`}
-      >
-        <div className="nav-drawer__header">
-          <div className="nav-drawer__brand">
-            <span className="navbar__brand-first">Mamta</span>
-            <span className="navbar__brand-last">Kurdia</span>
-          </div>
-
-          <button
-            className="nav-drawer__close"
-            onClick={closeMenu}
-          >
-            <FiX />
-          </button>
-        </div>
-
-        <ul className="nav-drawer__links">
-          {NAV_LINKS.map(({ id, label, icon }) => (
-            <li key={id}>
-              <a
-                href={`#${id}`}
-                onClick={closeMenu}
-                className="navbar__link"
-              >
-                <span className="navbar__link-icon">
-                  {icon}
-                </span>
-
-                <span className="navbar__link-label">
-                  {label}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </aside>
     </>
   );
 }
