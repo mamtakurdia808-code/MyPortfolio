@@ -1,5 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { FiFolder, FiBriefcase, FiAward, FiCalendar } from "react-icons/fi";
+import {
+  FiFolder,
+  FiBriefcase,
+  FiAward,
+  FiCalendar,
+  FiZap,
+  FiLayout,
+  FiCpu,
+  FiLock,
+  FiCode,
+  FiTrendingUp,
+} from "react-icons/fi";
 import { education } from "../../data/education";
 import { projects } from "../../data/projects";
 import { experience } from "../../data/experience";
@@ -33,6 +44,40 @@ function buildStats(edu, proj, exp, certs) {
   ];
 }
 
+/* ─── Developer card identity lines ─── */
+const devCardItems = [
+  { emoji: "👩‍💻", text: "Full Stack Developer" },
+  { emoji: "📍", text: "India" },
+  { emoji: "🎓", text: "Bachelors of Computer Applications" },
+  { emoji: "💼", text: "Open to Work" },
+  { emoji: "🤖", text: "AI & MERN Enthusiast" },
+  { emoji: "⚡", text: "Building scalable web applications" },
+];
+
+/* ─── Tech stack chips ─── */
+const techChips = [
+  "React",
+  "Node.js",
+  "Express",
+  "MongoDB",
+  "PostgreSQL",
+  "JavaScript",
+  "Git",
+  "GitHub",
+  "REST APIs",
+  "AI Integration",
+];
+
+/* ─── Core strength cards ─── */
+const coreStrengths = [
+  { icon: <FiZap aria-hidden="true" />, label: "Problem Solving" },
+  { icon: <FiLayout aria-hidden="true" />, label: "Responsive UI" },
+  { icon: <FiCpu aria-hidden="true" />, label: "AI Integration" },
+  { icon: <FiLock aria-hidden="true" />, label: "Authentication" },
+  { icon: <FiCode aria-hidden="true" />, label: "REST APIs" },
+  { icon: <FiTrendingUp aria-hidden="true" />, label: "Continuous Learning" },
+];
+
 /* ─── Intersection-observer reveal hook ─── */
 function useReveal(threshold = 0.12) {
   const ref = useRef(null);
@@ -55,9 +100,10 @@ function useReveal(threshold = 0.12) {
 ════════════════════════════════ */
 export default function About() {
   const stats = buildStats(education, projects, experience, certificates);
-  const [secRef,  secVis]  = useReveal(0.08);
-  const [imgRef,  imgVis]  = useReveal(0.1);
-  const [textRef, textVis] = useReveal(0.1);
+  const [secRef,     secVis]     = useReveal(0.08);
+  const [cardRef,    cardVis]    = useReveal(0.1);
+  const [textRef,    textVis]    = useReveal(0.1);
+  const [strengthRef, strengthVis] = useReveal(0.1);
 
   return (
     <section id="about" className="about" aria-labelledby="about-heading" ref={secRef}>
@@ -80,33 +126,40 @@ export default function About() {
         <div className="about__grid">
 
           {/* ════════════
-              LEFT — IMAGE
+              LEFT — DEVELOPER CARD
               ════════════ */}
           <div
-            ref={imgRef}
-            className={`about__image-wrap${imgVis ? " about__image-wrap--visible" : ""}`}
+            ref={cardRef}
+            className={`about__card-wrap${cardVis ? " about__card-wrap--visible" : ""}`}
           >
-            {/* decorative card stack */}
-            <div className="about__img-stack" aria-hidden="true">
-              <div className="about__img-card about__img-card--back" />
-              <div className="about__img-card about__img-card--mid"  />
-            </div>
+            <div className="about__dev-card" role="group" aria-label="Developer profile summary">
+              <ul className="about__dev-list">
+                {devCardItems.map(({ emoji, text }) => (
+                  <li className="about__dev-item" key={text}>
+                    <span className="about__dev-emoji" aria-hidden="true">{emoji}</span>
+                    <span>{text}</span>
+                  </li>
+                ))}
+              </ul>
 
-            <div className="about__img-frame">
-              <img
-                src="/profile.jpg"
-                alt="Mamta Kurdia — Full Stack Developer"
-                className="about__img"
-                loading="lazy"
-                draggable="false"
-              />
-              <div className="about__img-glare" aria-hidden="true" />
-            </div>
+              <hr className="about__dev-divider" aria-hidden="true" />
 
-            {/* floating badge */}
-            <div className="about__badge" aria-label="Open to work">
-              <span className="about__badge-dot" aria-hidden="true" />
-              Open to Work
+              <div
+                className="about__chip-row"
+                role="list"
+                aria-label="Technologies I work with"
+              >
+                {techChips.map((chip, i) => (
+                  <span
+                    role="listitem"
+                    key={chip}
+                    className="about__chip"
+                    style={{ "--chip-delay": `${0.5 + i * 0.05}s` }}
+                  >
+                    {chip}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -123,23 +176,27 @@ export default function About() {
 
             <div className="about__bio about__reveal about__reveal--2">
               <p>
-                I'm a passionate <strong>Full Stack Developer</strong> 
-                who loves turning ideas into polished, performant web 
-                experiences. Building products that are both beautiful 
-                and functional is what drives me every day.
+                I'm a <strong>Full Stack Developer</strong> focused on building
+                production-grade web applications with <strong>React</strong> on
+                the frontend and robust, scalable systems on the backend. My
+                work spans the entire stack — from designing REST APIs and
+                authentication flows to crafting interfaces that are fast,
+                accessible, and responsive across devices.
               </p>
               <p>
-                I've developed real-world full-stack applications — from
-                authentication systems and REST APIs to responsive dashboards
-                — gaining hands-on experience that goes well beyond the
-                classroom.
+                I enjoy solving hard problems: structuring databases for
+                performance, optimizing render cycles, and architecting code
+                that stays maintainable as projects grow. Every feature I
+                ship is built with both the user experience and the
+                underlying system in mind.
               </p>
               <p>
-                I'm deeply interested in <strong>AI-powered solutions</strong>,
-                having integrated tools like the Groq API to build intelligent
-                features such as ATS resume analysis and AI-driven feedback
-                systems. I believe great software solves real problems, and I'm
-                always looking for the next one worth solving.
+                I'm also actively exploring <strong>AI integration</strong> in
+                real products — using tools like the Groq API to power
+                features such as ATS resume analysis and intelligent
+                feedback systems. I'm looking for an internship where I can
+                bring this combination of full-stack engineering and applied
+                AI to a team solving meaningful problems.
               </p>
             </div>
 
@@ -165,6 +222,30 @@ export default function About() {
           </div>
 
         </div>
+
+        {/* ════════════
+            CORE STRENGTHS
+            ════════════ */}
+        <div
+          ref={strengthRef}
+          className={`about__strengths${strengthVis ? " about__strengths--visible" : ""}`}
+        >
+          <h3 className="about__strengths-heading">Core Strengths</h3>
+          <div className="about__strengths-grid" role="list" aria-label="Core strengths">
+            {coreStrengths.map(({ icon, label }, i) => (
+              <article
+                key={label}
+                className="about__strength-card"
+                role="listitem"
+                style={{ "--strength-delay": `${i * 0.07}s` }}
+              >
+                <div className="about__strength-icon">{icon}</div>
+                <div className="about__strength-label">{label}</div>
+              </article>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );

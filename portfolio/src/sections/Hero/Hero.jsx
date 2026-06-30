@@ -6,7 +6,7 @@ import {
   SiNodedotjs,
   SiPostgresql,
   SiTypescript,
-  SiFigma,
+  SiGithub,
   SiGit,
 } from "react-icons/si";
 import { socials } from "../../data/socials";
@@ -45,7 +45,6 @@ const HERO_CONTENT = {
     "I craft responsive, accessible web applications with pixel-perfect UIs and build AI-powered full-stack products that turn complex ideas into real-world experiences.",
   buttons: [
     { label: "View Projects", to: "/projects", variant: "primary" },
-    { label: "Download Resume", href: "/resume.pdf", variant: "outline", download: true  },
   ],
   image: "/profile.jpg",
 };
@@ -56,7 +55,7 @@ const TECH_PILLS = [
   { label: "Node.js",    icon: <SiNodedotjs  />, color: "#6CC24A" },
   { label: "PostgreSQL", icon: <SiPostgresql />, color: "#336791" },
   { label: "TypeScript", icon: <SiTypescript />, color: "#3178C6" },
-  { label: "Figma",      icon: <SiFigma      />, color: "#A259FF" },
+  { label: "Github",      icon: <SiGithub      />, color: "#A259FF" },
   { label: "Git",        icon: <SiGit        />, color: "#F05032" },
 ];
 
@@ -218,15 +217,6 @@ export default function Hero() {
   >
     View Projects
     <FiArrowRight aria-hidden="true" />
-  </a>
-
-  <a
-    href="/resume.pdf"
-    download
-    className="hero__btn hero__btn--outline"
-  >
-    Download Resume
-    <FiDownload aria-hidden="true" />
   </a>
 </motion.div>
 
