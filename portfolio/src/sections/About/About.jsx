@@ -22,22 +22,22 @@ function buildStats(edu, proj, exp, certs) {
   const grad = edu[0]?.duration?.split("–")[1]?.trim() ?? "2027";
   return [
     {
-      icon:  <FiFolder aria-hidden="true" />,
+      icon: <FiFolder aria-hidden="true" />,
       value: `${proj.length}+`,
       label: "Projects Completed",
     },
     {
-      icon:  <FiBriefcase aria-hidden="true" />,
+      icon: <FiBriefcase aria-hidden="true" />,
       value: `${exp.length}`,
       label: "Internship Experience",
     },
     {
-      icon:  <FiAward aria-hidden="true" />,
+      icon: <FiAward aria-hidden="true" />,
       value: `${certs.length}+`,
       label: "Certifications",
     },
     {
-      icon:  <FiCalendar aria-hidden="true" />,
+      icon: <FiCalendar aria-hidden="true" />,
       value: grad,
       label: "Expected Graduation",
     },
@@ -86,8 +86,13 @@ function useReveal(threshold = 0.12) {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold }
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -100,14 +105,18 @@ function useReveal(threshold = 0.12) {
 ════════════════════════════════ */
 export default function About() {
   const stats = buildStats(education, projects, experience, certificates);
-  const [secRef,     secVis]     = useReveal(0.08);
-  const [cardRef,    cardVis]    = useReveal(0.1);
-  const [textRef,    textVis]    = useReveal(0.1);
+  const [secRef, secVis] = useReveal(0.08);
+  const [cardRef, cardVis] = useReveal(0.1);
+  const [textRef, textVis] = useReveal(0.1);
   const [strengthRef, strengthVis] = useReveal(0.1);
 
   return (
-    <section id="about" className="about" aria-labelledby="about-heading" ref={secRef}>
-
+    <section
+      id="about"
+      className="about"
+      aria-labelledby="about-heading"
+      ref={secRef}
+    >
       {/* background accent */}
       <div className="about__bg" aria-hidden="true">
         <div className="about__bg-blob about__bg-blob--1" />
@@ -115,16 +124,16 @@ export default function About() {
       </div>
 
       <div className="about__container">
-
         {/* ── Section label ── */}
-        <div className={`about__eyebrow${secVis ? " about__eyebrow--visible" : ""}`}>
+        <div
+          className={`about__eyebrow${secVis ? " about__eyebrow--visible" : ""}`}
+        >
           <span className="about__eyebrow-line" aria-hidden="true" />
           <span className="about__eyebrow-text">Get to know me</span>
           <span className="about__eyebrow-line" aria-hidden="true" />
         </div>
 
         <div className="about__grid">
-
           {/* ════════════
               LEFT — DEVELOPER CARD
               ════════════ */}
@@ -132,11 +141,17 @@ export default function About() {
             ref={cardRef}
             className={`about__card-wrap${cardVis ? " about__card-wrap--visible" : ""}`}
           >
-            <div className="about__dev-card" role="group" aria-label="Developer profile summary">
+            <div
+              className="about__dev-card"
+              role="group"
+              aria-label="Developer profile summary"
+            >
               <ul className="about__dev-list">
                 {devCardItems.map(({ emoji, text }) => (
                   <li className="about__dev-item" key={text}>
-                    <span className="about__dev-emoji" aria-hidden="true">{emoji}</span>
+                    <span className="about__dev-emoji" aria-hidden="true">
+                      {emoji}
+                    </span>
                     <span>{text}</span>
                   </li>
                 ))}
@@ -170,7 +185,10 @@ export default function About() {
             ref={textRef}
             className={`about__content${textVis ? " about__content--visible" : ""}`}
           >
-            <h2 id="about-heading" className="about__heading about__reveal about__reveal--1">
+            <h2
+              id="about-heading"
+              className="about__heading about__reveal about__reveal--1"
+            >
               About <span className="about__heading-accent">Me</span>
             </h2>
 
@@ -186,17 +204,17 @@ export default function About() {
               <p>
                 I enjoy solving hard problems: structuring databases for
                 performance, optimizing render cycles, and architecting code
-                that stays maintainable as projects grow. Every feature I
-                ship is built with both the user experience and the
-                underlying system in mind.
+                that stays maintainable as projects grow. Every feature I ship
+                is built with both the user experience and the underlying system
+                in mind.
               </p>
               <p>
                 I'm also actively exploring <strong>AI integration</strong> in
-                real products — using tools like the Groq API to power
-                features such as ATS resume analysis and intelligent
-                feedback systems. I'm looking for an internship where I can
-                bring this combination of full-stack engineering and applied
-                AI to a team solving meaningful problems.
+                real products — using tools like the Groq API to power features
+                such as ATS resume analysis and intelligent feedback systems.
+                I'm looking for an internship where I can bring this combination
+                of full-stack engineering and applied AI to a team solving
+                meaningful problems.
               </p>
             </div>
 
@@ -220,7 +238,6 @@ export default function About() {
               ))}
             </div>
           </div>
-
         </div>
 
         {/* ════════════
@@ -231,7 +248,11 @@ export default function About() {
           className={`about__strengths${strengthVis ? " about__strengths--visible" : ""}`}
         >
           <h3 className="about__strengths-heading">Core Strengths</h3>
-          <div className="about__strengths-grid" role="list" aria-label="Core strengths">
+          <div
+            className="about__strengths-grid"
+            role="list"
+            aria-label="Core strengths"
+          >
             {coreStrengths.map(({ icon, label }, i) => (
               <article
                 key={label}
@@ -245,7 +266,6 @@ export default function About() {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );
