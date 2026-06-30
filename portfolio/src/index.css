@@ -109,6 +109,10 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 } */
-html{
-    scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 90px;
 }

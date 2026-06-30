@@ -1,6 +1,5 @@
 import React from "react";
 import "./Footer.css";
-import { Link } from "react-router-dom";
 
 import {
   FiGithub,
@@ -31,14 +30,14 @@ export default function Footer() {
 
         {/* Quick Links */}
         <div className="footer-links">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/projects">Projects</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-          </ul>
-        </div>
+  <h3>Quick Links</h3>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div>
 
         {/* Social Links */}
         <div className="footer-social">

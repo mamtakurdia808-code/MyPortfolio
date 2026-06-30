@@ -9,7 +9,6 @@ import {
   SiFigma,
   SiGit,
 } from "react-icons/si";
-import {Link} from "react-router-dom";
 import { socials } from "../../data/socials";
 import "./Hero.css";
 
@@ -213,13 +212,22 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <motion.div className="hero__buttons" {...fadeIn(0.4)}>
-  <Link
-    to="/projects"
+  <a
+    href="#projects"
     className="hero__btn hero__btn--primary"
   >
     View Projects
     <FiArrowRight aria-hidden="true" />
-  </Link>
+  </a>
+
+  <a
+    href="/resume.pdf"
+    download
+    className="hero__btn hero__btn--outline"
+  >
+    Download Resume
+    <FiDownload aria-hidden="true" />
+  </a>
 </motion.div>
 
           {/* Socials — from src/data/socials.js */}
