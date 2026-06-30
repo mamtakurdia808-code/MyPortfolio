@@ -195,34 +195,34 @@
 }
 
 /* ============================================================
-   IMAGE SIDE  — FIX: fill full card height, no fixed aspect-ratio
+   IMAGE SIDE — shows full screenshot, no cropping
    ============================================================ */
 
 .project__img-wrap {
   position: relative;
   overflow: hidden;
-  /* stretch to full card height */
   align-self: stretch;
   min-height: 280px;
+  background: #f4f4f8; /* fills the letterbox space around a contain'd image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .project__img {
-  /* absolutely fill the wrapper so it matches card height */
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center center;
+  object-fit: contain;   /* was: cover — that's what was cropping screenshots */
+  object-position: center;
   display: block;
   transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
 }
 
 .project__card:hover .project__img {
-  transform: scale(1.07);
+  transform: scale(1.04); /* smaller zoom since contain has less headroom than cover */
 }
 
-/* subtle dark overlay */
+/* subtle overlay */
 .project__img-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(
@@ -438,30 +438,22 @@
    RESPONSIVE
    ============================================================ */
 
-/* stack vertically on tablet */
+/* Stack vertically below 860px — image on top at a natural ratio */
 @media (max-width: 860px) {
   .project__card,
   .project__card--odd {
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1fr;
     direction: ltr;
     min-height: unset;
   }
 
   .project__card--odd > * { direction: ltr; }
 
-  /* restore aspect-ratio when stacked so image isn't zero-height */
   .project__img-wrap {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 1918 / 873;   /* same as your screenshots */
-}
-
-.project__img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-}
+    aspect-ratio: 16 / 9;
+    min-height: unset;
+    width: 100%;
+  }
 
   .project__content,
   .project__card--odd .project__content {
@@ -469,26 +461,48 @@
   }
 
   .project__ribbon {
-    top: auto;
+    top: 1rem;
     bottom: auto;
     left: 1rem;
-    top: 1rem;
     transform: none;
   }
 }
 
 @media (max-width: 560px) {
-  .projects { padding: 4.5rem 1rem; }
+  .projects { padding: 3.5rem 1rem; }
   .projects__list { gap: 2rem; }
+
+  .projects__heading { font-size: clamp(1.6rem, 7vw, 2rem); }
+  .projects__subheading { font-size: 0.9rem; }
+
+  .project__img-wrap { aspect-ratio: 4 / 3; }
 
   .project__content,
   .project__card--odd .project__content {
-    padding: 1.4rem 1.2rem;
-    gap: 1rem;
+    padding: 1.25rem 1.1rem;
+    gap: 0.9rem;
   }
 
-  .project__actions { flex-direction: column; }
-  .project__btn     { justify-content: center; }
+  .project__title { font-size: 1.2rem; }
+  .project__description { font-size: 0.875rem; line-height: 1.65; }
+
+  .project__badge,
+  .project__feature {
+    font-size: 0.7rem;
+    padding: 0.24rem 0.55rem;
+  }
+
+  .project__actions { flex-direction: column; gap: 0.6rem; }
+  .project__btn {
+    justify-content: center;
+    width: 100%;
+    padding: 0.7rem 1rem;
+  }
+
+  .project__ribbon {
+    font-size: 0.65rem;
+    padding: 0.26rem 0.7rem;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -523,6 +537,6 @@
   }
 
   .project__card:hover .project__img {
-    transform: scale(1.03);
-}
+    transform: scale(1.02);
+  }
 }
