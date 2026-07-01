@@ -1,6 +1,6 @@
 # 🌐 Mamta Kurdia - Portfolio
 
-A modern, responsive personal portfolio built with **React** and **Vite** to showcase my skills, projects, and experience as a Frontend Developer.
+A modern, responsive personal portfolio built with **React** and **Vite** to showcase my skills, projects, and experience as a FullStack Developer.
 
 🔗 **Live Demo:** https://mamtakurdia.vercel.app
 
