@@ -112,7 +112,7 @@ npm run build
 
 ---
 
-## ⭐ If you like this project
+## ⭐ If you like this
 
 Please consider giving this repository a ⭐ on GitHub!
 
