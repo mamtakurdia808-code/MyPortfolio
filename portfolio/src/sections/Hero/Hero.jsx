@@ -44,7 +44,7 @@ const HERO_CONTENT = {
   description:
     "I craft responsive, accessible web applications with pixel-perfect UIs and build AI-powered full-stack products that turn complex ideas into real-world experiences.",
   buttons: [{ label: "View Projects", to: "/projects", variant: "primary" }],
-  image: "/profilee.jpg",
+  image: "/profilee.png",
 };
 
 /* ── Tech pills for the orbit ── */
