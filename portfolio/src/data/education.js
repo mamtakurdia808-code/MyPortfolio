@@ -23,6 +23,10 @@ export const education = [
         semester: "Semester 4",
         grade: "9.68 SGPA",
       },
+      {
+        semester: "Semester 5",
+        grade: "9.50 SGPA",
+      },
     ],
   },
 ];
